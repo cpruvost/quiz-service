@@ -27,7 +27,7 @@ spring:
     database-platform: org.hibernate.dialect.Oracle12cDialect
     properties:
       hibernate:
-        '[show_sql]': true
+        '[show_sql]': false
         '[use_sql_comments]': true
         '[format_sql]': true
     
@@ -47,6 +47,6 @@ logging:
     #root: ERROR
     '[oracle.ucp]': INFO
     '[org.springframework.web]': ERROR
-    '[om.quizforevent.microservices.quizservice]': INFO
-    '[rg.hibernate]': ERROR
+    '[com.quizforevent.microservices.quizservice]': INFO
+    '[org.hibernate]': ERROR
  
