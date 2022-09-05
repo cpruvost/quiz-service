@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: quiz-service  
+
+  datasource:
+    url: jdbc:oracle:thin:@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-paris-1.oraclecloud.com))(connect_data=(service_name=g2198ebaf121fdb_cndb_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+    username: quizflyway
+    password: Alpha_2022__
+    driver-class-name: oracle.jdbc.OracleDriver
+    #type: oracle.ucp.jdbc.PoolDataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-init-sql: ALTER SESSION SET EDITION=V1
+      connection-test-query: select * from dual
+      minimum-idle: 5
+      maximum-pool-size: 10
+    #oracleucp:
+     # connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
+     # s-q-l-for-validate-connection: select * from dual
+     # connection-pool-name: connectionPoolCN
+     # initial-pool-size: 5
+     # min-pool-size: 3
+     # max-pool-size: 10
+    #tomcat:  
+      #init-s-q-l: ALTER SESSION SET EDITION=V1
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    properties:
+      hibernate:
+        '[show_sql]': true
+        '[use_sql_comments]': true
+        '[format_sql]': true
+    
+  sql:
+    init: 
+      encoding: UTF-8
+      
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  port: 8000 
+
+logging:
+  level:
+    #root: ERROR
+    '[oracle.ucp]': INFO
+    '[org.springframework.web]': ERROR
+    '[om.quizforevent.microservices.quizservice]': INFO
+    '[rg.hibernate]': ERROR
+ 
