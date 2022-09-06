@@ -23,7 +23,7 @@ spec:
         app: quiz
     spec:
       containers:
-      - image: cpruvost/cn-quiz-service:1.0.3-SNAPSHOT
+      - image: cpruvost/cn-quiz-service:1.0.4-SNAPSHOT
         imagePullPolicy: Always
         name: cn-quiz-service
         env:      

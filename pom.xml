@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.quizforevent.microservices</groupId>
 	<artifactId>quiz-service</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<name>quiz-service</name>
 	<description>Demo CN Project for Spring Boot</description>
 	<properties>
@@ -72,6 +72,11 @@
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
 		    <version>5.6.10.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.11</version>
 		</dependency>
 	<!--<dependency>
     		<groupId>com.oracle.database.ha</groupId>

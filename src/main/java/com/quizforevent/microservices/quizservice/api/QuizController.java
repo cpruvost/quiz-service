@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quizforevent.microservices.quizservice.domain.Quiz;
+import com.quizforevent.microservices.quizservice.domain.QuizAggregator;
 import com.quizforevent.microservices.quizservice.repository.QuizRepository;
 
 @RestController
@@ -53,4 +54,39 @@ public class QuizController {
 		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		    }
 	}
+	
+	@GetMapping("/quizaggregator")
+	public ResponseEntity<QuizAggregator> getQuizAggregator() {
+		try {
+		    logger.info("getQuizAggregator");
+			
+		    String host = environment.getProperty("HOSTNAME");
+			String version = "V1";
+			String port = environment.getProperty("local.server.port");
+		    
+		    List<Quiz> quizzes = new ArrayList<Quiz>();
+		    QuizAggregator quizAggregator = new QuizAggregator();
+		    int nbQuiz = 0;
+		    int nbQuestion = 0;
+		    String env = null;
+		    
+		    quizRepository.findAll().forEach(quizzes::add);
+		    
+		    for (Quiz quiz : quizzes) {
+		    	nbQuiz = nbQuiz + 1;
+		    	nbQuestion = nbQuestion + quiz.getQuestions().size();
+		    }
+		    
+		    quizAggregator.setNbQuiz(nbQuiz);
+		    quizAggregator.setNbQuestions(nbQuestion);
+		    quizAggregator.setEnvironment(port + " " + version + " " + host);
+		      
+		    return new ResponseEntity<>(quizAggregator, HttpStatus.OK);
+		      
+		    } catch (Exception e) {
+		      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		    }
+	}
+	
+	
 }
