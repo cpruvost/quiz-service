@@ -24,4 +24,9 @@ public class UtilController {
 		return new Util(utilService.getEdition());
 	}
 	
+	@GetMapping("/profile")
+	public String[] getProfile() {
+		return utilService.getProfile();
+	}
+	
 }

@@ -3,9 +3,9 @@ spring:
     name: quiz-service  
 
   datasource:
-    url: jdbc:oracle:thin:@(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=adb.eu-paris-1.oraclecloud.com))(connect_data=(service_name=g2198ebaf121fdb_cndb_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
-    username: quizflyway
-    password: Alpha_2022__
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: oracle.jdbc.OracleDriver
     #type: oracle.ucp.jdbc.PoolDataSource
     type: com.zaxxer.hikari.HikariDataSource
@@ -37,7 +37,7 @@ spring:
       
   config:
     activate:
-      on-profile: dev
+      on-profile: prod
 
 server:
   port: 8000 

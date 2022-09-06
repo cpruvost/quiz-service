@@ -23,9 +23,27 @@ spec:
         app: quiz
     spec:
       containers:
-      - image: cpruvost/cn-quiz-service:1.0.0-SNAPSHOT
-        imagePullPolicy: IfNotPresent
+      - image: cpruvost/cn-quiz-service:1.0.3-SNAPSHOT
+        imagePullPolicy: Always
         name: cn-quiz-service
+        env:      
+        - name: SPRING_PROFILE
+          value: prod
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: datasource-credentials
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: datasource-credentials
+              key: password
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: datasource-credentials
+              key: url      
         readinessProbe:
           httpGet:
             port: 8000
