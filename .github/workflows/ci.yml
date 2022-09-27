@@ -3,7 +3,7 @@ name: Provision ATP
 on: 
   push:
     branches:
-      - main
+      - main, develop
   issues:
     types: [opened, reopened]    
   workflow_dispatch:
