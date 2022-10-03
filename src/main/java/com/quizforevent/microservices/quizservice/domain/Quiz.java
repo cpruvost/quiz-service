@@ -26,6 +26,7 @@ public class Quiz {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_GEN_QUIZ")
 	private Integer Id;
 	private String name;
+	private String details;
 	
 	@Transient
 	private String environment;
@@ -70,9 +71,18 @@ public class Quiz {
 		this.environment = environment;
 	}
 
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
 	@Override
 	public String toString() {
-		return "Quiz [Id=" + Id + ", name=" + name + ", environment=" + environment + ", questions=" + questions + "]";
+		return "Quiz [Id=" + Id + ", name=" + name + ", details=" + details + ", environment=" + environment
+				+ ", questions=" + questions + "]";
 	}
 	
 }

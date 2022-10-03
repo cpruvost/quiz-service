@@ -10,7 +10,7 @@ spring:
     #type: oracle.ucp.jdbc.PoolDataSource
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      connection-init-sql: ALTER SESSION SET EDITION=V1
+      connection-init-sql: ALTER SESSION SET EDITION=V1POINT2
       connection-test-query: select * from dual
       minimum-idle: 5
       maximum-pool-size: 10

@@ -32,7 +32,7 @@ public class QuizController {
 		    logger.info("getAllQuizzes");
 			
 		    String host = environment.getProperty("HOSTNAME");
-			String version = "V1";
+			String version = "V1.2";
 			String port = environment.getProperty("local.server.port");
 		    
 		    List<Quiz> quizzes = new ArrayList<Quiz>();
@@ -61,7 +61,7 @@ public class QuizController {
 		    logger.info("getQuizAggregator");
 			
 		    String host = environment.getProperty("HOSTNAME");
-			String version = "V1";
+			String version = "V1.2";
 			String port = environment.getProperty("local.server.port");
 		    
 		    List<Quiz> quizzes = new ArrayList<Quiz>();
