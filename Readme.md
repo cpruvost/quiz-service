@@ -18,7 +18,7 @@ execute : alter session set edition=V1POINT2; --> The view V_QUIZ has 3 colums
 
 You need to be able to run a docker container locally.
 
-You need to have a kubernetes cluster (with istio installed) if you want to deploy these microservices on kube
+You need to have a kubernetes cluster (with istio installed + all other nice tools [prometheus, grafana, kiali and jaeger]) if you want to deploy these microservices on kube
 
 ## Run the microservices application locally.
 
