@@ -1,10 +1,10 @@
 name: Provision OKE
 
 on: 
-  push:
-    branches:
-      - main
-      - develop
+  #push:
+    #branches:
+      #- main
+      #- develop
   issues:
     types: [opened, reopened]    
   workflow_dispatch:
