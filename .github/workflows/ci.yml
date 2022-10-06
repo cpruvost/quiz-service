@@ -39,7 +39,14 @@ jobs:
           java-version: 17
           maven-version: ${{ matrix.maven }}
 
-      - run: mvn -v
+      - name: Build Docker Image with Maven
+        run: |
+          mvn -v
+          docker -v
+          mvn spring-boot:build-image -DskipTests
+          docker images
+      
+      
     
 #      - name: Get or create an OCIR Repository
 #        uses: oracle-actions/get-ocir-repository@v1.1
