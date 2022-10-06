@@ -1,4 +1,4 @@
-name: Provision OKE
+name: Build and Push Docker Images
 
 on: 
   push:
@@ -12,9 +12,14 @@ on:
       - main
 
 jobs:
-  get-ocir-repository-test:
+  docker-build-push:
     runs-on: ubuntu-latest
-    name: Get OCIR Repository Test
+    name: Docker Build Push
+    
+    strategy:
+      matrix:
+        maven: [ '3.8.6' ]
+    
     env:
       OCI_CLI_USER: ${{ secrets.TF_VAR_USER_OCID }}
       OCI_CLI_TENANCY: ${{ secrets.TF_VAR_TENANCY_OCID }}
@@ -32,7 +37,7 @@ jobs:
         uses: s4u/setup-maven-action@< version >
         with:
           java-version: 17
-          maven-version: 3.8.6
+          maven-version: ${{ matrix.maven }}
 
       - run: mvn -V
     
