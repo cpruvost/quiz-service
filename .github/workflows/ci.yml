@@ -1,10 +1,10 @@
 name: Provision OKE
 
 on: 
-  #push:
-    #branches:
-      #- main
-      #- develop
+  push:
+    branches:
+      - main
+      - develop
   issues:
     types: [opened, reopened]    
   workflow_dispatch:
@@ -21,25 +21,39 @@ jobs:
       OCI_CLI_FINGERPRINT: ${{ secrets.TF_VAR_FINGERPRINT }}
       OCI_CLI_KEY_CONTENT: ${{ secrets.TF_VAR_PRIVATE_KEY }}
       OCI_CLI_REGION: ${{ secrets.TF_VAR_REGION }}
+      
     steps:
-      - name: Get or create an OCIR Repository
-        uses: oracle-actions/get-ocir-repository@v1.1
-        id: get-ocir-repository
+      - name: Checkout V1.0.4
+        uses: actions/checkout@v3
         with:
-          name: oraclelinux
-          compartment: ${{ secrets.TF_VAR_COMPARTMENT_OCID }}
-
-      - name: Log into OCIR
-        uses: oracle-actions/login-ocir@v1.1
-        id: login-ocir
+          ref: v1.0.4
+      
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@< version >
         with:
-          auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
+          java-version: 17
+          maven-version: 3.8.6
 
-      - name: Tag and push a container image
-        id: tag-and-push-image
-        run: |
-          docker -v
-          echo "repo : ${{ steps.get-ocir-repository.outputs.repo_path }}"
-          docker pull oraclelinux:8-slim
-          docker tag "oraclelinux:8-slim" "${{ steps.get-ocir-repository.outputs.repo_path }}:8-slim"
-          docker push "${{ steps.get-ocir-repository.outputs.repo_path }}:8-slim"
+      - run: mvn -V
+    
+#      - name: Get or create an OCIR Repository
+#        uses: oracle-actions/get-ocir-repository@v1.1
+#        id: get-ocir-repository
+#        with:
+#          name: oraclelinux
+#          compartment: ${{ secrets.TF_VAR_COMPARTMENT_OCID }}
+#
+#      - name: Log into OCIR
+#        uses: oracle-actions/login-ocir@v1.1
+#        id: login-ocir
+#        with:
+#          auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
+#
+#      - name: Tag and push a container image
+#        id: tag-and-push-image
+#        run: |
+#          docker -v
+#          echo "repo : ${{ steps.get-ocir-repository.outputs.repo_path }}"
+#          docker pull oraclelinux:8-slim
+#          docker tag "oraclelinux:8-slim" "${{ steps.get-ocir-repository.outputs.repo_path }}:8-slim"
+#          docker push "${{ steps.get-ocir-repository.outputs.repo_path }}:8-slim"
